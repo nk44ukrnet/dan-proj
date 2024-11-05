@@ -12,7 +12,8 @@
     --background-color: #fff;
     --secondary-background-color: hsl(0, 0%, 98%);
     --border-color: hsl(0, 0%, 90%);
-    --color1: orange;
+    /*--color1: orange;*/
+    --color1: #4EA524;
     --color2: #A0522D;
     --border-radius-sm: 5px;
     --border-radius: 15px;
@@ -24,7 +25,8 @@
     --input-text-color: #000; /* Black text for inputs */
     --input-placeholder-color: hsl(0, 0%, 60%); /* Medium gray for placeholder text */
     --input-border-color: hsl(0, 0%, 85%); /* Light gray for borders */
-    --input-focus-border-color: hsl(30, 100%, 60%); /* Accent color for focus */
+    /*--input-focus-border-color: hsl(30, 100%, 60%); !* Accent color for focus *!*/
+    --input-focus-border-color: #377319; /* Accent color for focus */
 
 
 }
@@ -52,7 +54,8 @@ body {
 body.dark-mode {
     --text-color: hsl(228, 5%, 80%);
     --background-color: hsl(228, 5%, 15%);
-    --color1: hsl(30, 100%, 60%);
+    /*--color1: hsl(30, 100%, 60%);*/
+    --color1: #5CC12C;
     --secondary-background-color: hsl(228, 5%, 20%);
     --border-color: hsl(228, 5%, 25%);
     --error: hsl(0, 100%, 65%); /* Bright red for errors */
@@ -60,7 +63,8 @@ body.dark-mode {
 
     --input-background-color: hsl(228, 5%, 20%); /* Background color for inputs */
     --input-border-color: hsl(228, 5%, 25%); /* Border color for inputs */
-    --input-focus-border-color: hsl(30, 100%, 60%); /* Focus border color */
+    /*--input-focus-border-color: hsl(30, 100%, 60%); !* Focus border color *!*/
+    --input-focus-border-color: ##377319; /* Focus border color */
     --input-text-color: hsl(228, 5%, 85%); /* Text color for inputs */
     --input-placeholder-color: hsl(228, 5%, 60%); /* Placeholder text color */
 }
