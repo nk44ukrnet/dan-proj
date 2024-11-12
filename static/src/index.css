@@ -20,6 +20,7 @@
     --shadow: 2px 5px 15px rgba(0, 0, 0, 0.25);
     --error: #c11717;
     --success: #00c170;
+    --transition: all 0.25s linear;
 
     --input-background-color: hsl(0, 0%, 98%); /* Light gray for input background */
     --input-text-color: #000; /* Black text for inputs */
@@ -64,7 +65,7 @@ body.dark-mode {
     --input-background-color: hsl(228, 5%, 20%); /* Background color for inputs */
     --input-border-color: hsl(228, 5%, 25%); /* Border color for inputs */
     /*--input-focus-border-color: hsl(30, 100%, 60%); !* Focus border color *!*/
-    --input-focus-border-color: ##377319; /* Focus border color */
+    --input-focus-border-color: #377319; /* Focus border color */
     --input-text-color: hsl(228, 5%, 85%); /* Text color for inputs */
     --input-placeholder-color: hsl(228, 5%, 60%); /* Placeholder text color */
 }
@@ -169,6 +170,20 @@ h6 {
 .pointer:hover {
     cursor: pointer;
 }
+
+textarea {
+    box-shadow: var(--shadow);
+    padding: 10px;
+    box-sizing: border-box;
+    width: 100%;
+    border-radius: var(--border-radius);
+    display: table;
+    margin-bottom: 10px;
+    color: var(--text-color);
+    background-color: var(--background-color);
+}
+
+
 
 /**
  * Render the `main` element consistently in IE.

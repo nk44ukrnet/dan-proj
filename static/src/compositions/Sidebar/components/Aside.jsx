@@ -7,6 +7,24 @@ const Aside = styled.aside`
     width: 100%;
     max-width: 170px;
     position: relative;
+    background-color: var(--background-color);
+    
+    .bars {
+        display: none;
+    }
+
+    @media (max-width: ${MOBILE_SIZE}px) {
+        //display: none;
+        position: fixed;
+        z-index: 5;
+        height: 100%;
+        overflow-y: auto;
+        transition: var(--transition);
+        
+        &:not(.active) {
+            transform: translateX(-110%);
+        }
+    }
 
     ul {
         padding: 0;

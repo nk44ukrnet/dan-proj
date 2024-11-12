@@ -1,11 +1,13 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState, useRef} from 'react';
 import Aside from './components/Aside.jsx';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {
     faHouse,
     faArrowRightFromBracket,
     faCircleHalfStroke,
-    faXmark
+    faXmark,
+    faPlus,
+    faBars
 } from '@fortawesome/free-solid-svg-icons';
 import {Link} from 'react-router-dom';
 import {useDispatch} from "react-redux";
@@ -13,6 +15,8 @@ import {logout, toggleDarkMode} from '../../store/index.js';
 import {useNavigate} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {selectorUser, selectorDarkMode} from "../../store/selectors.js";
+import cn from 'classnames';
+import Bars from './components/Bars.jsx'
 
 
 const Sidebar = () => {
@@ -20,8 +24,11 @@ const Sidebar = () => {
     const navigate = useNavigate();
     const selUser = useSelector(selectorUser);
     const selDarkMode = useSelector(selectorDarkMode);
+    const [open, setOpen] = useState(false);
+    const sidebarRef = useRef();
 
-    function handleDarkModeToggle(){
+
+    function handleDarkModeToggle() {
         dispatch(toggleDarkMode());
     }
 
@@ -33,16 +40,29 @@ const Sidebar = () => {
         dispatch(logout());
         navigate('/login');
     }
+
     return (
-        <Aside className="shadow">
-            <span className="pointer btn-type times"><FontAwesomeIcon icon={faXmark} /></span>
-            <p>Hello, <strong>{selUser?.firstName}</strong></p>
-            <ul>
-                <li className="transition1"><Link to="/"><FontAwesomeIcon icon={faHouse} /> <span>Home</span></Link></li>
-                <li className="transition1 colored pointer" onClick={handleDarkModeToggle}><FontAwesomeIcon icon={faCircleHalfStroke} /> <span>Toggle Theme</span></li>
-                <li className="transition1 colored pointer" onClick={handleLogout}><FontAwesomeIcon icon={faArrowRightFromBracket} /> <span>Log out</span></li>
-            </ul>
-        </Aside>
+        <>
+            <Bars ref={sidebarRef} onClick={() => setOpen(!open)}>
+                <FontAwesomeIcon icon={open ? faXmark : faBars} className="bars" style={{pointerEvents: 'none'}}/>
+            </Bars>
+
+            <Aside ref={sidebarRef} className={cn('shadow', {'active': open})}>
+                <span className="pointer btn-type times" onClick={() => setOpen(!open)}><FontAwesomeIcon icon={faXmark}
+                                                                                                         style={{pointerEvents: 'none'}}/></span>
+                <p>Hello, <strong>{selUser?.firstName}</strong></p>
+                <ul>
+                    <li className="transition1"><Link to="/"><FontAwesomeIcon icon={faHouse}/> <span>Home</span></Link>
+                    </li>
+                    <li className="transition1 colored pointer" onClick={handleDarkModeToggle}><FontAwesomeIcon
+                        icon={faCircleHalfStroke}/> <span>Toggle Theme</span></li>
+                    <li className="transition1"><Link to="/post-add"><FontAwesomeIcon icon={faPlus}/> Add post</Link>
+                    </li>
+                    <li className="transition1 colored pointer" onClick={handleLogout}><FontAwesomeIcon
+                        icon={faArrowRightFromBracket}/> <span>Log out</span></li>
+                </ul>
+            </Aside>
+        </>
     );
 };
 
