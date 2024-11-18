@@ -6,7 +6,7 @@ import {
     faTrash,
 } from '@fortawesome/free-solid-svg-icons';
 import styled from "styled-components";
-import {isCurrentUserOrAdmin} from "../../../helpers/isCurrentUserOrAdmin.js";
+import {useIsCurrentUserOrAdmin} from  '../../../customHooks/useIsCurrentUserOrAdmin.js'
 
 const Controls = styled.span`
     display: inline-flex;
@@ -14,20 +14,21 @@ const Controls = styled.span`
     flex-wrap: wrap;
     gap: 10px;`
 
-const PostMeta = ({userFirstName, userId, postId, date, currentUser, isAdmin}) => {
+const PostMeta = ({userFirstName, userId, postId, date}) => {
+    const canEditOrDelete = useIsCurrentUserOrAdmin(userId);
     let formattedDate = new Date(date).toLocaleDateString();
     return (
         <p>
             By <Link to={`/user-view/${userId}`}>{userFirstName}</Link> on {formattedDate}
-            {/*{currentUser || isAdmin && <Controls>*/}
-            {/*    |*/}
-            {/*    <Link to={`/post-edit/${postId}`} title="Edit post">*/}
-            {/*        <FontAwesomeIcon icon={faPenToSquare}/>*/}
-            {/*    </Link>*/}
-            {/*    <Link className="error" to={`/post-delete/${postId}`} title="Delete post">*/}
-            {/*        <FontAwesomeIcon icon={faTrash}/>*/}
-            {/*    </Link>*/}
-            {/*</Controls>}*/}
+            {canEditOrDelete && <Controls>
+                |
+                <Link to={`/post-edit/${postId}`} title="Edit post">
+                    <FontAwesomeIcon icon={faPenToSquare}/>
+                </Link>
+                <Link className="error" to={`/post-delete/${postId}`} title="Delete post">
+                    <FontAwesomeIcon icon={faTrash}/>
+                </Link>
+            </Controls>}
         </p>
     );
 };

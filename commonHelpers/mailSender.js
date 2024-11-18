@@ -1,4 +1,3 @@
-/*
 const nodemailer = require("nodemailer");
 const keys = require("../config/keys");
 const getConfigs = require("../config/getConfigs");
@@ -38,4 +37,3 @@ module.exports = async (subscriberMail, letterSubject, letterHtml, res) => {
 
   return result;
 };
-*/

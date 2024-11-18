@@ -7,7 +7,7 @@ import {useParams} from 'react-router-dom';
 import {sendRequest} from "../../helpers/sendRequest.js";
 import {API} from "../../config/API.js";
 import {Link} from "react-router-dom";
-import PostMeta from './components/PostMeta.jsx'
+import PostMeta from './components/PostMeta.jsx';
 
 const PostView = () => {
     notLoggedIn();
@@ -24,12 +24,6 @@ const PostView = () => {
                 const postResponse = await sendRequest(`${API}posts/${postId}`, 'GET');
                 setPostData(postResponse);
 
-
-                // Fetch the user data based on the post's user ID
-                // if (postResponse.user && postResponse.user._id) {
-                //     const userResponse = await sendRequest(`${API}users/${postResponse.user._id}`, 'GET');
-                //     setUserData(userResponse);
-                // }
             } catch (err) {
                 setError(err); // Handle errors
             } finally {
@@ -52,11 +46,15 @@ const PostView = () => {
                 {postData.imageUrls[0] && <img src={postData.imageUrls[0]} className="img-long" />}
                 <PostMeta
                     userFirstName={postData.user.firstName}
-                    userLastName={postData.userFirstName}
                     date={postData.date}
                     postId={postId}
+                    userId={postData.user._id}
                 />
-                <p>By <Link to={`/user-view/${postData.user['_id']}`}>{postData.user.firstName}</Link> on {new Date(postData.date).toLocaleDateString()}</p>
+                <p>
+                    {postData.content}
+                </p>
+                <hr/>
+                <h5>Comments:</h5>
             </Content>
 
         </Main>
