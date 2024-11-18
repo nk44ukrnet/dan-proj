@@ -17,6 +17,7 @@ import {useSelector} from "react-redux";
 import {selectorUser, selectorDarkMode} from "../../store/selectors.js";
 import cn from 'classnames';
 import Bars from './components/Bars.jsx'
+import Overlay from './components/Overlay.jsx'
 
 
 const Sidebar = () => {
@@ -62,6 +63,8 @@ const Sidebar = () => {
                         icon={faArrowRightFromBracket}/> <span>Log out</span></li>
                 </ul>
             </Aside>
+
+            {open && <Overlay onClick={() => setOpen(!open)} />}
         </>
     );
 };

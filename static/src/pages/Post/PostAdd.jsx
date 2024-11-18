@@ -9,9 +9,11 @@ import {selectorSession} from "../../store/selectors.js";
 import ImageUpload from "../../components/ImageUpload/ImageUpload.jsx";
 import Button from '../../components/Button/Button.jsx'
 import {notLoggedIn} from "../../helpers/notLoggedIn.js";
+import {useNavigate} from "react-router-dom";
 
 const PostAdd = () => {
     notLoggedIn();
+    const navigate = useNavigate();
     const textAreaRef = useRef();
     const btnRef = useRef();
     let selSession = useSelector(selectorSession);
@@ -22,7 +24,6 @@ const PostAdd = () => {
     };
     async function handleSubmit(e) {
         e.preventDefault();
-        console.log(textAreaRef.current.value)
         const headers = {
             Authorization: selSession.token,
         };
@@ -33,7 +34,10 @@ const PostAdd = () => {
 
         try {
             await sendRequest(`${API}posts`, 'POST', {body}, headers)
-                .then()
+                .then((data)=>{
+                    console.log(data)
+                    navigate(`/post-view/${data['_id']}`);
+                })
                 .catch((err) => {})
                 .finally(() => {  });
             console.log("Post created successfully!");

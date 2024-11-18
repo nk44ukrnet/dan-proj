@@ -4,6 +4,7 @@ import Login from '../pages/Auth/Login.jsx'
 import Register from '../pages/Auth/Register.jsx'
 import Home from '../pages/Home/Home.jsx'
 import PostAdd from "../pages/Post/PostAdd.jsx";
+import PostView from "../pages/Post/PostView.jsx"
 
 const RoutesList = () => {
     return (
@@ -12,6 +13,7 @@ const RoutesList = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/post-add" element={<PostAdd />} />
+            <Route path="/post-view/:id" element={<PostView />} />
         </Routes>
     );
 };

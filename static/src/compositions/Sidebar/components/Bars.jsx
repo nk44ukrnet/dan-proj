@@ -18,6 +18,7 @@ const Bars = styled.button`
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 3;
 
     @media (min-width: ${MOBILE_SIZE}px) {
         display: none;
