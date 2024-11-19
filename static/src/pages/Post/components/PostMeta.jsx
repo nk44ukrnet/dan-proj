@@ -7,6 +7,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import styled from "styled-components";
 import {useIsCurrentUserOrAdmin} from  '../../../customHooks/useIsCurrentUserOrAdmin.js'
+import {useIsAdmin} from  '../../../customHooks/useIsAdmin.js'
 
 const Controls = styled.span`
     display: inline-flex;
@@ -15,19 +16,20 @@ const Controls = styled.span`
     gap: 10px;`
 
 const PostMeta = ({userFirstName, userId, postId, date}) => {
-    const canEditOrDelete = useIsCurrentUserOrAdmin(userId);
+    const canEdit = useIsCurrentUserOrAdmin(userId);
+    const canDelete = useIsAdmin();
     let formattedDate = new Date(date).toLocaleDateString();
     return (
         <p>
             By <Link to={`/user-view/${userId}`}>{userFirstName}</Link> on {formattedDate}
-            {canEditOrDelete && <Controls>
+            {canEdit && <Controls>
                 |
                 <Link to={`/post-edit/${postId}`} title="Edit post">
                     <FontAwesomeIcon icon={faPenToSquare}/>
                 </Link>
-                <Link className="error" to={`/post-delete/${postId}`} title="Delete post">
+                {canDelete && <Link className="error" to={`/post-delete/${postId}`} title="Delete post">
                     <FontAwesomeIcon icon={faTrash}/>
-                </Link>
+                </Link>}
             </Controls>}
         </p>
     );

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useMemo } from 'react';
 import {notLoggedIn} from "../../helpers/notLoggedIn.js";
 import Sidebar from "../../compositions/Sidebar/Sidebar.jsx";
 import Content from "../../containers/Content/Content.jsx";
@@ -13,7 +13,7 @@ const PostView = () => {
     notLoggedIn();
     const {id: postId} = useParams();
     const [postData, setPostData] = useState(null); // State to store the first request data
-    const [userData, setUserData] = useState(null); // State to store the second request data
+    // const [userData, setUserData] = useState(null); // State to store the second request data
     const [error, setError] = useState(null); // State to handle any errors
     const [loading, setLoading] = useState(true); // State for loading indicator
 
@@ -34,7 +34,16 @@ const PostView = () => {
         fetchData();
     }, [postId]); // Runs when `postId` changes
 
-    console.log(postData)
+    const postMetaData = useMemo(() => {
+        if (!postData) return null;
+        return {
+            userFirstName: postData.user.firstName,
+            date: postData.date,
+            postId,
+            userId: postData.user._id,
+        };
+    }, [postData, postId]);
+
     // Loading and error states
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error: {error.message || 'Something went wrong.'}</p>;
@@ -44,12 +53,14 @@ const PostView = () => {
             <Sidebar/>
             <Content>
                 {postData.imageUrls[0] && <img src={postData.imageUrls[0]} className="img-long" />}
-                <PostMeta
-                    userFirstName={postData.user.firstName}
-                    date={postData.date}
-                    postId={postId}
-                    userId={postData.user._id}
-                />
+                {postMetaData && (
+                    <PostMeta
+                        userFirstName={postMetaData.userFirstName}
+                        date={postMetaData.date}
+                        postId={postMetaData.postId}
+                        userId={postMetaData.userId}
+                    />
+                )}
                 <p>
                     {postData.content}
                 </p>

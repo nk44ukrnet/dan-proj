@@ -188,7 +188,9 @@ textarea {
     height: 400px;
     object-fit: cover;
 }
-
+.table {
+    display: table;
+}
 
 
 /**

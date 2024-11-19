@@ -1,28 +1,33 @@
 import React, {useState} from "react";
 import Button from '../Button/Button.jsx'
 import styled from "styled-components"
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {
+    faXmark,
+} from '@fortawesome/free-solid-svg-icons';
+
 
 const InpUploadWrapper = styled.div`
-        padding-block: 10px;
+    padding-block: 10px;
 
-        .btn-type {
-            position: relative;
-            width: 100%;
-            max-width: fit-content;
-            display: inline-block;
-            margin-right: 10px;
+    .btn-type {
+        position: relative;
+        width: 100%;
+        max-width: fit-content;
+        display: inline-block;
+        margin-right: 10px;
 
-            input {
-                position: absolute;
-                width: 0;
-                height: 0;
-                opacity: 0;
-                z-index: 2;
-            }
+        input {
+            position: absolute;
+            width: 0;
+            height: 0;
+            opacity: 0;
+            z-index: 2;
         }
-    `;
+    }
+`;
 
-const ImageUpload = ({imgUrl, onUpload }) => {
+const ImageUpload = ({imgUrl, onUpload}) => {
     const [file, setFile] = useState(null);
     const [imageUrl, setImageUrl] = useState(imgUrl || '');
     const [loading, setLoading] = useState(false);
@@ -32,6 +37,13 @@ const ImageUpload = ({imgUrl, onUpload }) => {
     const CLOUD_NAME = "dzeeenijr"; // Replace with your Cloudinary cloud name
     const UPLOAD_PRESET = "presetOne"; // Replace with your unsigned upload preset
 
+    function handleResetToDefault() {
+        setFile(null);
+        setImageUrl('');
+        setLoading(false);
+        setError("");
+        onUpload(null);
+    }
 
     const handleFileChange = (e) => {
         const selectedFile = e.target.files[0];
@@ -45,7 +57,6 @@ const ImageUpload = ({imgUrl, onUpload }) => {
             setFile(selectedFile);
         }
     };
-
 
 
     const handleUpload = async () => {
@@ -90,8 +101,15 @@ const ImageUpload = ({imgUrl, onUpload }) => {
                 <div>
                     <p>Uploaded Image:</p>
                     <img src={imageUrl} alt="Uploaded" width="200"/>
+                    <div>
+                        <button className="error pointer btn-type" onClick={handleResetToDefault}>Remove
+                            image <FontAwesomeIcon icon={faXmark}/></button>
+                    </div>
                 </div>
             )}
+            <div>
+
+            </div>
         </InpUploadWrapper>
     );
 };
