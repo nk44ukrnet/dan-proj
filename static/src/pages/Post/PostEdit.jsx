@@ -6,7 +6,7 @@ import {selectorSession, selectorUser} from "../../store/selectors.js";
 import Sidebar from "../../compositions/Sidebar/Sidebar.jsx";
 import Content from "../../containers/Content/Content.jsx";
 import Main from "../../containers/Main/Main.jsx";
-import {useNavigate, useParams} from 'react-router-dom';
+import {useNavigate, useParams, Link} from 'react-router-dom';
 import ImageUpload from "../../components/ImageUpload/ImageUpload.jsx";
 import Button from "../../components/Button/Button.jsx";
 import {sendRequest} from "../../helpers/sendRequest.js";
@@ -16,6 +16,7 @@ const PostEdit = () => {
     notLoggedIn();
     const {id: postId} = useParams();
     const selUser = useSelector(selectorUser);
+    let selSession = useSelector(selectorSession);
     const canEdit = useIsCurrentUserOrAdmin(selUser._id);
     const navigate = useNavigate();
     const textAreaRef = useRef();
@@ -27,8 +28,26 @@ const PostEdit = () => {
     const [loading, setLoading] = useState(true); // State for loading indicator
     const [postData, setPostData] = useState(null); // Request post data
 
-    function handleSubmit(e){
+    async function handleSubmit(e) {
         e.preventDefault();
+
+        const headers = {
+            Authorization: selSession.token,
+            user: selUser._id,
+        };
+
+        const body = {
+            content: content,
+            imageUrls: imageUrl ? [imageUrl] : []
+        };
+
+        try {
+            const data = await sendRequest(`${API}posts/${postId}`, 'PUT', {body: JSON.stringify(body)}, headers);
+            console.log("Post Edited successfully!", data);
+            navigate(`/post-view/${postId}`);
+        } catch (error) {
+            console.error("Error editing post:", error);
+        }
     }
 
     const handleImageUpload = (url) => {
@@ -64,15 +83,13 @@ const PostEdit = () => {
     if (error) return <p>Error: {error.message || 'Something went wrong.'}</p>;
 
 
-    console.log('Post Data: ', postData);
-
     return (
         <Main>
             <Sidebar/>
             <Content>
                 <h5>Post editing</h5>
                 <form onSubmit={handleSubmit}>
-                    <ImageUpload imgUrl={imageUrl} onUpload={handleImageUpload} />
+                    <ImageUpload imgUrl={imageUrl} onUpload={handleImageUpload}/>
                     <div className="mb">
                          <textarea
                              name="content"
@@ -83,7 +100,10 @@ const PostEdit = () => {
                              placeholder="post content"
                          ></textarea>
                     </div>
-                    <Button ref={btnRef} type="submit" className="transition1">Edit Post</Button>
+                    <div className="casual-flex">
+                        <Button ref={btnRef} type="submit" className="transition1">Edit Post</Button>
+                        <Link to={`/post-view/${postId}`} className="btn-type transition1 without-text-decoration">Cancel</Link>
+                    </div>
                 </form>
             </Content>
         </Main>

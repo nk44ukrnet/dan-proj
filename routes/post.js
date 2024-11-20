@@ -30,6 +30,7 @@ router.put(
 // @desc    Update post likes
 router.patch(
     "/:id",
+    passport.authenticate("jwt", { session: false }),
     updatePostLikes,
 );
 

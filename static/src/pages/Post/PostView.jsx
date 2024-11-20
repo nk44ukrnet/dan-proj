@@ -33,6 +33,7 @@ const PostView = () => {
 
         fetchData();
     }, [postId]); // Runs when `postId` changes
+    console.log('POST DATA', postData)
 
     const postMetaData = useMemo(() => {
         if (!postData) return null;
@@ -41,12 +42,15 @@ const PostView = () => {
             date: postData.date,
             postId,
             userId: postData.user._id,
+            likes: postData.likes,
         };
     }, [postData, postId]);
 
     // Loading and error states
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error: {error.message || 'Something went wrong.'}</p>;
+
+    console.log(postData)
 
     return (
         <Main>
@@ -59,13 +63,12 @@ const PostView = () => {
                         date={postMetaData.date}
                         postId={postMetaData.postId}
                         userId={postMetaData.userId}
+                        likes={postMetaData.likes}
                     />
                 )}
                 <p>
                     {postData.content}
                 </p>
-                <hr/>
-                <h5>Comments:</h5>
             </Content>
 
         </Main>
