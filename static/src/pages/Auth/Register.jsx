@@ -9,7 +9,6 @@ import {authRegisterValidation} from './authRegisterValidation.js'
 import {API} from '../../config/API.js';
 import {sendRequest} from '../../helpers/sendRequest.js'
 import {useDispatch} from "react-redux";
-import {setUser} from "../../store/index.js";
 
 
 const Register = () => {
@@ -40,7 +39,6 @@ const Register = () => {
             })
                 .then(data => {
                     console.log(data);
-                    //dispatch(setUser(data));
                     navigate("/login");
                 })
                 .catch((err) => {
@@ -55,8 +53,6 @@ const Register = () => {
                 }).finally(() => {
                     buttonRef.current.removeAttribute('disabled');
                 })
-
-            //console.log('Register values ', values);
         }
     })
     return (
