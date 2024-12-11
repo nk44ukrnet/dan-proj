@@ -21,7 +21,7 @@ const Controls = styled.span`
     flex-wrap: wrap;
     gap: 10px;`
 
-const PostMeta = ({userFirstName, userId, postId, date, likes}) => {
+const PostMeta = ({userFirstName = 'author', userId, postId, date, likes}) => {
     const canEdit = useIsCurrentUserOrAdmin(userId);
     const canDelete = useIsAdmin();
     let formattedDate = new Date(date).toLocaleDateString();
@@ -70,6 +70,8 @@ const PostMeta = ({userFirstName, userId, postId, date, likes}) => {
             console.log(err);
         }
     }
+
+
 
     return (
         <p>

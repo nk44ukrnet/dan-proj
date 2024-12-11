@@ -40,7 +40,6 @@ const Login = () => {
                 body: JSON.stringify(values),
             })
                 .then(data => {
-                    console.log('login', data);
                     dispatch(setSession(data));
                     navigate("/");
                 })
@@ -56,9 +55,6 @@ const Login = () => {
                 }).finally(() => {
                     buttonRef.current.removeAttribute('disabled');
                 })
-
-
-            console.log('login values ', values);
         }
     })
     return (

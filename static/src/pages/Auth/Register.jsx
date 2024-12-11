@@ -38,7 +38,6 @@ const Register = () => {
                 body: JSON.stringify(values),
             })
                 .then(data => {
-                    console.log(data);
                     navigate("/login");
                 })
                 .catch((err) => {
@@ -49,7 +48,6 @@ const Register = () => {
                     } else {
                         setErrorMessage(`Error happened on server: "${err}"`);
                     }
-                    console.error('Error:', err);
                 }).finally(() => {
                     buttonRef.current.removeAttribute('disabled');
                 })

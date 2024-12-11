@@ -207,13 +207,15 @@ exports.getPostsFilterParams = async (req, res, next) => {
     const mongooseQuery = filterParser(req.query);
     const perPage = Number(req.query.perPage) || 10;
     const startPage = Number(req.query.startPage) || 1;
-    const sort = req.query.sort || "date";
+    const sort = req.query.sort || "-date";
 
     try {
         const posts = await Post.find(mongooseQuery)
             .skip(startPage * perPage - perPage)
             .limit(perPage)
+            .populate('user', 'firstName')
             .sort(sort);
+
 
         const postsQuantity = await Post.find(mongooseQuery);
 

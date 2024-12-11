@@ -33,7 +33,7 @@ const PostView = () => {
 
         fetchData();
     }, [postId]); // Runs when `postId` changes
-    console.log('POST DATA', postData)
+
 
     const postMetaData = useMemo(() => {
         if (!postData) return null;
@@ -46,11 +46,11 @@ const PostView = () => {
         };
     }, [postData, postId]);
 
+
     // Loading and error states
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error: {error.message || 'Something went wrong.'}</p>;
 
-    console.log(postData)
 
     return (
         <Main>

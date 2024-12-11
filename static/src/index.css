@@ -114,7 +114,12 @@ h6 {
 .text-center {
     text-align: center;
 }
-
+.text-underline {
+    text-decoration: underline;
+}
+.text-decoration-none {
+    text-decoration: none;
+}
 .colored {
     color: var(--color1);
 }
@@ -123,6 +128,44 @@ h6 {
 }
 .text-color {
     color: var(--text-color);
+}
+.posts-loop {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    margin-bottom: 25px;
+}
+.posts-loop li {
+    flex: 1 1 350px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.post-image {
+    width: 100%;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--border-color);
+}
+.posts-loop img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+.text-trim {
+    display: -webkit-box; /* For WebKit browsers */
+    -webkit-line-clamp: 3; /* Approximate 15 words by limiting to 3 lines */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal; /* Allow wrapping */
+    max-height: 4.5em; /* Adjust based on line height (e.g., 1.5em * 3 lines) */
+    line-height: 1.5em; /* Ensure consistent line spacing */
 }
 .btn-type {
     padding: 5px;
@@ -133,6 +176,12 @@ h6 {
     border: 1px solid var(--border-color);
     width: fit-content;
     color: var(--text-color);
+    background: var(--background-color);
+}
+.common-flex {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
 }
 
 .bg {
@@ -159,6 +208,9 @@ h6 {
 .error {
     color: var(--error);
 }
+.btn-error {
+    background-color: var(--error) !important;
+}
 
 .transition1 {
     transition: all .25s linear;
@@ -181,6 +233,8 @@ textarea {
     margin-bottom: 10px;
     color: var(--text-color);
     background-color: var(--background-color);
+    border: 1px solid var(--border-color);
+    resize: none;
 }
 
 .img-long {
