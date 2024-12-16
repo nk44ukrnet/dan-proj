@@ -104,7 +104,7 @@ const AwardEdit = () => {
                     </div>
                     <div className="casual-flex">
                         <Button ref={btnRef} type="submit" className="transition1">Edit Award</Button>
-                        <Link to={`/award-view/${postId}`} className="btn-type transition1 without-text-decoration">Cancel</Link>
+                        <Link to={`/award-view/${postId}`} className="btn-link-error transition1 without-text-decoration">Cancel</Link>
                     </div>
                 </form>
             </Content>

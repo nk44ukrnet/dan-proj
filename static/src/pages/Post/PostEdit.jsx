@@ -102,7 +102,7 @@ const PostEdit = () => {
                     </div>
                     <div className="casual-flex">
                         <Button ref={btnRef} type="submit" className="transition1">Edit Post</Button>
-                        <Link to={`/post-view/${postId}`} className="btn-type transition1 without-text-decoration">Cancel</Link>
+                        <Link to={`/post-view/${postId}`} className="btn-link-error transition1 without-text-decoration">Cancel</Link>
                     </div>
                 </form>
             </Content>

@@ -27,7 +27,7 @@ const InpUploadWrapper = styled.div`
     }
 `;
 
-const ImageUpload = ({imgUrl, onUpload}) => {
+const ImageUpload = ({imgUrl, onUpload, disableCancle = false}) => {
     const [file, setFile] = useState(null);
     const [imageUrl, setImageUrl] = useState(imgUrl || '');
     const [loading, setLoading] = useState(false);
@@ -42,7 +42,7 @@ const ImageUpload = ({imgUrl, onUpload}) => {
         setImageUrl('');
         setLoading(false);
         setError("");
-        onUpload(null);
+        onUpload(null); // Send null when resetting
     }
 
     const handleFileChange = (e) => {
@@ -82,8 +82,8 @@ const ImageUpload = ({imgUrl, onUpload}) => {
 
     return (
         <InpUploadWrapper>
-            <label className="btn-type pointer">
-                <span>Choose your image</span>
+            <label className="btn-type pointer" style={{background: 'transparent', border: 'none'}}>
+                <span className="btn-link-v1">Choose your image</span>
                 <span></span>
                 <input
                     type="file"
@@ -102,8 +102,9 @@ const ImageUpload = ({imgUrl, onUpload}) => {
                     <p>Uploaded Image:</p>
                     <img src={imageUrl} alt="Uploaded" width="200"/>
                     <div>
-                        <button className="error pointer btn-type" onClick={handleResetToDefault}>Remove
-                            image <FontAwesomeIcon icon={faXmark}/></button>
+                        {!disableCancle && <button className="pointer btn-type btn-link-error" style={{marginTop: '6px'}}
+                                 onClick={handleResetToDefault}>Remove
+                            image <FontAwesomeIcon icon={faXmark}/></button>}
                     </div>
                 </div>
             )}

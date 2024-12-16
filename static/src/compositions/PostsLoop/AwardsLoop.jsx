@@ -54,7 +54,7 @@ const AwardsLoop = () => {
                             </Link>
                             {isAdmin && <AwardMeta awardId={award._id}/> }
                             <div className="text-trim">{award.content || 'No description available'}</div>
-                            <Link className="btn-type text-decoration-none" to={`/award-view/${award._id}`}>
+                            <Link className="btn-link text-decoration-none" to={`/award-view/${award._id}`}>
                                 Details
                             </Link>
                         </li>

@@ -15,6 +15,8 @@ import {userEditValidationGeneral} from './userEditValidationGeneral.js'
 import {useIsCurrentUser} from "../../customHooks/useIsCurrentUser.js";
 import {setUser} from "../../store/index.js";
 import {useDispatch} from "react-redux";
+import ImageUpload from "../../components/ImageUpload/ImageUpload.jsx";
+import {useNavigate} from "react-router-dom";
 
 const UserEdit = () => {
     notLoggedIn();
@@ -23,6 +25,8 @@ const UserEdit = () => {
     const selUser = useSelector(selectorUser);
     const selSession = useSelector(selectorSession);
     const canEdit = useIsCurrentUser(selUser._id);
+    const [imageUrl, setImageUrl] = useState(''); // State to store image URL
+    const navigate = useNavigate();
 
     const btnRef = useRef();
 
@@ -42,6 +46,7 @@ const UserEdit = () => {
                 // Fetch the post data
                 const userResponse = await sendRequest(`${API}users/${userID}`, 'GET');
                 setUserData(userResponse);
+                console.log('user response ', userResponse)
 
             } catch (err) {
                 setError(err); // Handle errors
@@ -56,14 +61,16 @@ const UserEdit = () => {
     }, [userID]); // Runs when `userID` changes
 
 
-    const initialPasswordData = {
+    const initialDataData = {
         firstName: userData?.firstName || '',
         lastName: userData?.lastName || '',
+        avatar: imageUrl || userData?.avatar || '', // Always a string
     }
+
 
     const formik = useFormik({
         enableReinitialize: true,
-        initialValues: initialPasswordData,
+        initialValues: initialDataData,
         validationSchema: userEditValidationGeneral,
         onSubmit: async (values, {resetForm}) => {
 
@@ -75,6 +82,7 @@ const UserEdit = () => {
                 .then(data => {
                     setInputStatus(`Changes successfully saved`);
                     dispatch(setUser(data));
+                    navigate(`/user-view/${userID}`)
                 })
                 .catch((err) => {
                     setInputStatus('There was an error while saving user. Try different values for one of the inputs');
@@ -84,6 +92,11 @@ const UserEdit = () => {
                 })
         }
     })
+
+    const handleImageUpload = (url) => {
+        setImageUrl(url || ''); // Fallback to empty string
+        formik.setFieldValue('avatar', url || ''); // Sync Formik's avatar field with empty string
+    };
 
     // Early return for loading and error states
     if (loading) return <p>Loading...</p>;
@@ -99,6 +112,19 @@ const UserEdit = () => {
                     {inputStatus && <p>{inputStatus}</p>}
 
                     <form onSubmit={formik.handleSubmit}>
+
+                        <p>Avatar:</p>
+                        <ImageUpload
+                            imgUrl={formik.values.avatar || userData.avatar}
+                            onUpload={handleImageUpload}
+                            disableCancle={true}
+                        />
+                        <input
+                            type="hidden"
+                            name="avatar"
+                            value={formik.values.avatar || ''} // Always a string
+                        />
+
                         <Input
                             name="firstName"
                             labelText="First Name"
@@ -117,7 +143,8 @@ const UserEdit = () => {
                         />
                         <div className="casual-flex">
                             <Button type="submit" ref={btnRef}>Save</Button>
-                            <Link to={`/user-view/${userID}`} className="btn-type without-text-decoration">Cancel</Link>
+                            <Link to={`/user-view/${userID}`}
+                                  className="btn-link-error without-text-decoration">Cancel</Link>
                         </div>
                     </form>
                 </div>}

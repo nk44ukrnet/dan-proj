@@ -64,7 +64,7 @@ router.delete(
 // @route   GET api/users
 // @desc    GET appropriate filtered users
 // @access  Public
-//router.get("/", getUsersFilterParams);
+router.get("/", getUsersFilterParams);
 
 
 module.exports = router;

@@ -5,7 +5,7 @@ import {MOBILE_SIZE} from "../../../variables/commonVariables.js";
 const Aside = styled.aside`
     padding: 20px;
     width: 100%;
-    max-width: 170px;
+    max-width: 200px;
     position: relative;
     background-color: var(--background-color);
     
@@ -32,8 +32,10 @@ const Aside = styled.aside`
         list-style: none;
         display: flex;
         flex-direction: column;
-        gap: 15px;
-        margin-block: 25px;
+        gap: 20px;
+        margin-block: 25px 25px;
+        box-sizing: border-box;
+        //height: 100%;
     }
 
     li {

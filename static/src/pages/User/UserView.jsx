@@ -49,6 +49,7 @@ const UserView = () => {
             firstName: userData.firstName,
             lastName: userData.lastName,
             email: userData.email,
+            avatar: userData?.avatar || '',
         };
     }, [userData, userID]);
 
@@ -64,6 +65,9 @@ const UserView = () => {
             <Sidebar/>
             <Content>
                 <h5>User Info</h5>
+                {userMetaData.avatar && <>
+                    <img src={userMetaData.avatar} alt="avatar" className="avatar" loading="lazy"/>
+                </>}
                 <p>First Name:</p>
                 <p><strong>{userMetaData.firstName}</strong></p>
                 <p>Last Name:</p>

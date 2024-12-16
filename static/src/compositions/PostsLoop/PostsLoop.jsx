@@ -15,7 +15,7 @@ const PostsLoop = () => {
     const [postShown, setPostShown] = useState(0);
 
     useEffect(() => {
-        setLoadingMessage('Loading posts...');
+        setLoadingMessage('');
         const fetchData = async () => {
             setLoading(true);
             try {
@@ -74,7 +74,7 @@ const PostsLoop = () => {
                                 userFirstName={post.user?.firstName || "Unknown"}
                             />
                             <div className="text-trim">{post.content}</div>
-                            <Link className="btn-type text-decoration-none" to={`/post-view/${post._id}`}>
+                            <Link className="btn-link-v1 text-decoration-none" to={`/post-view/${post._id}`}>
                                 Read More
                             </Link>
                         </li>
@@ -84,8 +84,8 @@ const PostsLoop = () => {
                 !loading && <p>No posts available.</p>
             )}
             <div className="common-flex">
-                {startPage > 1 && <Button onClick={handlePrev}>Previous</Button>}
-                {postShown < postQuantity && <Button onClick={handleNext}>Next</Button>}
+                {startPage > 1 && <Button onClick={handlePrev}>Previous Page</Button>}
+                {postShown < postQuantity && <Button onClick={handleNext}>Next Page</Button>}
             </div>
         </div>
     );

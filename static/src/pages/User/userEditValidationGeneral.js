@@ -1,6 +1,9 @@
 import * as yup from 'yup';
 
 export const userEditValidationGeneral = yup.object({
+    'avatar': yup
+        .string()
+        .url("Must be a valid avatar URL"),
     'firstName': yup
         .string()
         .required('First Name is required.')

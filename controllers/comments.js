@@ -31,11 +31,11 @@ exports.updateComment = (req, res, next) => {
         });
       }
 
-      if (!(req.user.isAdmin || req.user.id === comment.userId)) {
-        return res.status(403).json({
-          message: `You don't have permission to perform this action.`,
-        });
-      }
+      // if (!(req.user.isAdmin || req.user.id === comment.userId)) {
+      //   return res.status(403).json({
+      //     message: `You don't have permission to perform this action.`,
+      //   });
+      // }
 
       const commentData = _.cloneDeep(req.body);
       const updatedComment = queryCreator(commentData);
@@ -68,11 +68,11 @@ exports.deleteComment = (req, res, next) => {
       });
     }
 
-    if (!(req.user.isAdmin || req.user.id === comment.userId)) {
+/*    if (!(req.user.isAdmin || req.user.id === comment.userId)) {
       return res.status(403).json({
         message: `You don't have permission to perform this action.`,
       });
-    }
+    }*/
 
     Comment.deleteOne({ _id: req.params.id })
       .then((deletedCount) =>

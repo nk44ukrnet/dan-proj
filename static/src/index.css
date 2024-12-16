@@ -178,6 +178,39 @@ h6 {
     color: var(--text-color);
     background: var(--background-color);
 }
+.btn-link {
+    padding: 12px 24px;
+    box-sizing: border-box;
+    border-radius: var(--border-radius);
+    border: none;
+    background-color: var(--color1);
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    width: fit-content;
+}
+.btn-link-v1 {
+    padding: 12px 24px;
+    box-sizing: border-box;
+    border-radius: var(--border-radius);
+    border: none;
+    background-color: var(--border-color);
+    color: var(--text-color);
+    cursor: pointer;
+    display: inline-block;
+    width: fit-content;
+}
+.btn-link-error {
+    padding: 12px 24px;
+    box-sizing: border-box;
+    border-radius: var(--border-radius);
+    border: none;
+    background-color: var(--error);
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    width: fit-content;
+}
 .common-flex {
     display: flex;
     gap: 10px;
@@ -194,6 +227,9 @@ h6 {
 
 .mb {
     margin-bottom: 10px;
+}
+.mt {
+    margin-top: 10px;
 }
 
 .p2 {
@@ -212,6 +248,30 @@ h6 {
     background-color: var(--error) !important;
 }
 
+.input {
+    width: 100%;
+    display: block;
+    box-shadow: var(--shadow);
+    border-radius: var(--border-radius);
+    padding: 10px;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+
+    background-color: var(--input-background-color);
+    color: var(--input-text-color);
+    border: 1px solid var(--input-border-color);
+}
+.input::placeholder {
+    color: var(--input-placeholder-color);
+}
+.input:focus {
+    border-color: var(--input-focus-border-color);
+    outline: none; /* Remove default focus outline */
+}
+.input.error {
+    border-color: var(--error);
+}
+
 .transition1 {
     transition: all .25s linear;
 }
@@ -221,6 +281,13 @@ h6 {
 }
 .pointer:hover {
     cursor: pointer;
+}
+
+.avatar {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    /*border-radius: 50%;*/
 }
 
 textarea {
@@ -253,6 +320,17 @@ textarea {
     flex-wrap: wrap;
     gap: 10px;
     align-items: center;
+}
+.user-flex {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.user-flex a {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
 }
 .casual-flex-inline {
     display: inline-flex;

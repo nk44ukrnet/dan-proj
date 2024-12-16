@@ -8,6 +8,7 @@ import {sendRequest} from "../../helpers/sendRequest.js";
 import {API} from "../../config/API.js";
 import {Link} from "react-router-dom";
 import PostMeta from './components/PostMeta.jsx';
+import CommentList from "../Comments/CommentList.jsx";
 
 const PostView = () => {
     notLoggedIn();
@@ -69,6 +70,10 @@ const PostView = () => {
                 <p>
                     {postData.content}
                 </p>
+                <hr/>
+                <h5>Comments</h5>
+                <Link to={`/comment-add/${postId}`} className="btn-link text-decoration-none transition1">Add comment</Link>
+                <CommentList postId={postId} />
             </Content>
 
         </Main>

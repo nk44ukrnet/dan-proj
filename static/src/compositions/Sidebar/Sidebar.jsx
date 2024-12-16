@@ -2,7 +2,7 @@ import React, {useEffect, useState, useRef} from 'react';
 import Aside from './components/Aside.jsx';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {
-    faHouse,
+    faBlog,
     faArrowRightFromBracket,
     faCircleHalfStroke,
     faXmark,
@@ -10,6 +10,7 @@ import {
     faBars,
     faUser,
     faAward,
+    faMagnifyingGlass,
 } from '@fortawesome/free-solid-svg-icons';
 import {Link} from 'react-router-dom';
 import {useDispatch} from "react-redux";
@@ -56,11 +57,11 @@ const Sidebar = () => {
                 <span className="pointer btn-type times" onClick={() => setOpen(!open)}><FontAwesomeIcon icon={faXmark}
                                                                                                          style={{pointerEvents: 'none'}}/></span>
                 <p style={{overflow: 'hidden'}}>Hello, <strong className="text-underline"><Link to={`/user-view/${selUser?._id}`}>{selUser?.firstName}</Link></strong></p>
+                <p className="error">Activity:</p>
                 <ul>
-                    <li className="transition1"><Link to="/"><FontAwesomeIcon icon={faHouse}/> <span>Home</span></Link>
+                    <li className="transition1"><Link to="/"><FontAwesomeIcon icon={faBlog}/> <span>Latest posts</span></Link>
                     </li>
-                    <li className="transition1 pointer" onClick={handleDarkModeToggle}><FontAwesomeIcon
-                        icon={faCircleHalfStroke}/> <span>Toggle Theme</span></li>
+
                     <li className="transition1"><Link to="/post-add"><FontAwesomeIcon icon={faPlus}/> Add post</Link>
                     </li>
                     {isAdmin && <li className="transition1"><Link to="/award-add"><FontAwesomeIcon icon={faPlus}/> Add
@@ -69,8 +70,16 @@ const Sidebar = () => {
                     <li className="transition1"><Link to={`/award-list/`}><FontAwesomeIcon
                         icon={faAward}/> All awards</Link>
                     </li>
+                    <li>
+                        <Link to={`/user-search`}><FontAwesomeIcon icon={faMagnifyingGlass} /> Find Author</Link>
+                    </li>
+                </ul>
+                <p className="error">My account:</p>
+                <ul>
+                    <li className="transition1 pointer" onClick={handleDarkModeToggle}><FontAwesomeIcon
+                        icon={faCircleHalfStroke}/> <span>Toggle Theme</span></li>
                     <li className="transition1"><Link to={`/user-view/${selUser?._id}`}><FontAwesomeIcon
-                        icon={faUser}/> My Account</Link>
+                        icon={faUser}/> View Account</Link>
                     </li>
                     <li className="transition1 pointer" onClick={handleLogout}><FontAwesomeIcon
                         icon={faArrowRightFromBracket}/> <span>Log out</span></li>
